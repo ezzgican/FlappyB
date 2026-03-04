@@ -8,8 +8,8 @@ public class PipeSpawner : MonoBehaviour
 
 
     [SerializeField] private GameObject pipePairPrefab;
-    [SerializeField] private float spawnInterval = 1.2f;
-    [SerializeField] private float spawnX = 3.5f;
+    [SerializeField] private float spawnInterval = 1.6f;
+    [SerializeField] private float spawnX = 3f;
     [SerializeField] private float minY = -1.5f;
     [SerializeField] private float maxY = 1.5f;
 
@@ -17,6 +17,17 @@ public class PipeSpawner : MonoBehaviour
 
     void Update()
     {
+        if (GameController.Instance == null || !GameController.Instance.IsPlaying())
+            return;
+
+        timer += Time.deltaTime;
+        if (timer >= spawnInterval)
+        {
+            timer = 0f;
+            float y = Random.Range(minY, maxY);
+            Instantiate(pipePairPrefab, new Vector3(spawnX, y, 0f), Quaternion.identity);
+        }
+
         timer += Time.deltaTime;
         if (timer >= spawnInterval)
         {

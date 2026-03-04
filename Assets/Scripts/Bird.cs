@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bird : MonoBehaviour
 {
-    
+
 
     [SerializeField] private float jumpForce = 5f;
 
@@ -13,11 +13,30 @@ public class Bird : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.freezeRotation = true; // kuþ dönmesin (opsiyonel ama faydalý)
+        rb.freezeRotation = true;
+    }
+
+    public void SetSimulated(bool value)
+    {
+        // value=false iken kuþ düþmez/haraket etmez
+        rb.simulated = value;
+
+        if (!value)
+            rb.velocity = Vector2.zero;
     }
 
     public void GoUp()
     {
-        rb.velocity = Vector2.up * jumpForce;
+        rb.velocity = new Vector2(0f, jumpForce);
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        // Playing deðilse çarpýþmayý görmezden gel (ör. start öncesi)
+        if (GameController.Instance == null) return;
+        if (!GameController.Instance.IsPlaying()) return;
+
+        // Pipe veya base'e çarptýysa game over
+        GameController.Instance.GameOver();
     }
 }

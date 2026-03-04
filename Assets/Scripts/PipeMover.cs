@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class PipeMover : MonoBehaviour
 {
-    [SerializeField] private float speed = 2f;
-    [SerializeField] private float destroyX = -6f;
+    [SerializeField] float speed = 2.2f;
+    [SerializeField] float destroyX = -6f;
 
-    void Update()
+    Rigidbody2D rb;
+
+    void Awake() => rb = GetComponent<Rigidbody2D>();
+
+    void FixedUpdate()
     {
-        transform.position += Vector3.left * speed * Time.deltaTime;
+        rb.MovePosition(rb.position + Vector2.left * speed * Time.fixedDeltaTime);
 
-        if (transform.position.x < destroyX)
+        if (rb.position.x < destroyX)
             Destroy(gameObject);
     }
 }

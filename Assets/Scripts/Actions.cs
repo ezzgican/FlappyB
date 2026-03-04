@@ -5,23 +5,27 @@ using UnityEngine;
 
 public class Actions : MonoBehaviour
 {
-   
 
-    // Update is called once per frame
+
+
     void Update()
     {
+        if (GameController.Instance == null) return;
 
-        if (GameController.Instance == null)
+        bool tapped =
+            (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
+            || Input.GetMouseButtonDown(0); // editor test için
+
+        if (!tapped) return;
+
+        // oyun baþlamadýysa baþlat
+        if (!GameController.Instance.IsPlaying())
         {
-            Debug.LogError("GameController Instance is NULL");
+            GameController.Instance.StartGame();
             return;
         }
 
-        if (Input.touchCount > 0) {
-            if (Input.touches[0].phase == TouchPhase.Began) {
-                Debug.Log("touched");
-                GameController.Instance.bird.GoUp();
-            }
-        }
+        // playing ise zýplat
+        GameController.Instance.bird.GoUp();
     }
 }
