@@ -1,16 +1,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameOverUI : MonoBehaviour
 {
-    
 
-    public void Show()
+    [SerializeField] private TextMeshProUGUI gameOverScoreText;
+
+    
+    public void Show(int score)
     {
         gameObject.SetActive(true);
+
+       
+        gameOverScoreText.text = "Score: " + score;
     }
 
     public void Hide()

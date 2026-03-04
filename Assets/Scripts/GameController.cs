@@ -1,11 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameController : MonoBehaviour
 {
     public static GameController Instance { get; private set; }
+
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private GameObject scoreUI;
+
+
+    private int score = 0;
+    public int Score => score;
 
     public enum GameState {
         WaitingToStart,
@@ -35,6 +44,11 @@ public class GameController : MonoBehaviour
     {
         if (bird != null)
             bird.SetSimulated(false);
+
+        scoreUI.SetActive(true);
+
+        score = 0;
+        scoreText.text = "Score: 0";
     }
 
     public bool IsPlaying() => State == GameState.Playing;
@@ -49,6 +63,8 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
+        
+
         if (State == GameState.GameOver) return;
 
         State = GameState.GameOver;
@@ -56,12 +72,20 @@ public class GameController : MonoBehaviour
         // oyun dursun
         Time.timeScale = 0f;
 
-        if (gameOverUI != null) gameOverUI.Show();
+        scoreUI.SetActive(false);
+
+        if (gameOverUI != null) gameOverUI.Show(score);
     }
 
     public void Restart()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void AddScore()
+    {
+        score++;
+        scoreText.text = "Score: " + score.ToString();
     }
 }
