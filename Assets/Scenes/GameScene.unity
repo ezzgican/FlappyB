@@ -429,6 +429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb05f670853b17241b8384b124419b99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 261044899}
   gameOverScoreText: {fileID: 7943670}
 --- !u!1 &512015261
 GameObject:
@@ -461,6 +462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d07d979a0895fc2418a87fc01d345624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 261044899}
   jumpForce: 5
 --- !u!50 &512015263
 Rigidbody2D:
@@ -1042,6 +1044,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25476b95d44c4de45ab1c6116da50ab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 261044899}
+  bird: {fileID: 512015262}
 --- !u!4 &1283475393
 Transform:
   m_ObjectHideFlags: 0
@@ -1434,8 +1438,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f346d6195090af4d803acd89b044b0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 261044899}
   pipePairPrefab: {fileID: 3008497806627469145, guid: e9e169fdd3ca8e14a836c3d4e1f0fad8, type: 3}
-  spawnInterval: 2.7
+  spawnInterval: 2
   spawnX: 3.5
   minY: -1.5
   maxY: 1.5

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class GameOverUI : MonoBehaviour
 {
-
+    [SerializeField] private GameController gameController;
     [SerializeField] private TextMeshProUGUI gameOverScoreText;
 
     
@@ -28,6 +28,6 @@ public class GameOverUI : MonoBehaviour
     public void OnClickRestart()
     {
         Debug.Log("Restart pressed");
-        GameController.Instance.Restart();
+        gameController.Restart();
     }
 }

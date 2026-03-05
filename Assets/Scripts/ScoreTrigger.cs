@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class ScoreTrigger : MonoBehaviour
 {
+    [SerializeField] private GameController gameController;
     private bool scored = false;
 
+    public void SetGameController(GameController gc)
+    {
+        gameController = gc;
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Trigger entered by: " + other.name);
@@ -16,7 +21,9 @@ public class ScoreTrigger : MonoBehaviour
         {
             scored = true;
             Debug.Log("Scored!");
-            GameController.Instance.AddScore();
+            gameController.AddScore();
         }
     }
+
+   
 }

@@ -6,11 +6,12 @@ using UnityEngine;
 public class Actions : MonoBehaviour
 {
 
-
+    [SerializeField] private GameController gameController;
+    [SerializeField] private Bird bird;
 
     void Update()
     {
-        if (GameController.Instance == null) return;
+       
 
         bool tapped =
             (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
@@ -19,13 +20,13 @@ public class Actions : MonoBehaviour
         if (!tapped) return;
 
         // oyun baþlamadýysa baþlat
-        if (!GameController.Instance.IsPlaying())
+        if (!gameController.IsPlaying())
         {
-            GameController.Instance.StartGame();
+            gameController.StartGame();
             return;
         }
 
         // playing ise zýplat
-        GameController.Instance.bird.GoUp();
+        bird.GoUp();
     }
 }

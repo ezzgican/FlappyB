@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bird : MonoBehaviour
 {
-
+    [SerializeField] private GameController gameController;
 
     [SerializeField] private float jumpForce = 5f;
 
@@ -33,10 +33,10 @@ public class Bird : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
         // Playing deðilse çarpýþmayý görmezden gel (ör. start öncesi)
-        if (GameController.Instance == null) return;
-        if (!GameController.Instance.IsPlaying()) return;
+        
+        if (!gameController.IsPlaying()) return;
 
         // Pipe veya base'e çarptýysa game over
-        GameController.Instance.GameOver();
+        gameController.GameOver();
     }
 }

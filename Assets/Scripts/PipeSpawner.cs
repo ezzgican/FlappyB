@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PipeSpawner : MonoBehaviour
 {
-    
+    [SerializeField] private GameController gameController;
 
 
     [SerializeField] private GameObject pipePairPrefab;
@@ -17,7 +17,7 @@ public class PipeSpawner : MonoBehaviour
 
     void Update()
     {
-        if (GameController.Instance == null || !GameController.Instance.IsPlaying())
+        if (!gameController.IsPlaying())
             return;
 
         timer += Time.deltaTime;
@@ -25,16 +25,17 @@ public class PipeSpawner : MonoBehaviour
         {
             timer = 0f;
             float y = Random.Range(minY, maxY);
-            Instantiate(pipePairPrefab, new Vector3(spawnX, y, 0f), Quaternion.identity);
+
+            var pipe = Instantiate(pipePairPrefab, new Vector3(spawnX, y, 0f), Quaternion.identity);
+
+            var scoreTrigger = pipe.GetComponentInChildren<ScoreTrigger>();
+            if (scoreTrigger != null)
+            {
+                scoreTrigger.SetGameController(gameController);
+            }
         }
 
-        timer += Time.deltaTime;
-        if (timer >= spawnInterval)
-        {
-            timer = 0f;
-            float y = Random.Range(minY, maxY);
-            Instantiate(pipePairPrefab, new Vector3(spawnX, y, 0f), Quaternion.identity);
-        }
+        
     }
 }
 

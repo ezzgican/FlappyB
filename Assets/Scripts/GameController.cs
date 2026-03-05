@@ -7,7 +7,6 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class GameController : MonoBehaviour
 {
-    public static GameController Instance { get; private set; }
 
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private GameObject scoreUI;
@@ -29,7 +28,7 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+       
         Application.targetFrameRate = 60;
 
         // Oyun baþta duruyor (UI kapalý)
